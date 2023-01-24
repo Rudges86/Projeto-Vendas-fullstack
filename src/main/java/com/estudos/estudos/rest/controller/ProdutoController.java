@@ -1,5 +1,6 @@
 package com.estudos.estudos.rest.controller;
 
+import com.estudos.estudos.domain.entity.DTO.JsonResponseDto;
 import com.estudos.estudos.domain.entity.DTO.ProdutoDTO;
 import com.estudos.estudos.domain.entity.Produto;
 import com.estudos.estudos.service.ProdutoService;
@@ -31,9 +32,10 @@ public class ProdutoController {
     }
 
     @PostMapping
-    public ResponseEntity<ProdutoDTO> saveProduto(@RequestBody Produto produto){
+    public ResponseEntity<JsonResponseDto> saveProduto(@RequestBody Produto produto){
         produtoService.saveProduto(produto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        JsonResponseDto jsonResponseDto = new JsonResponseDto(HttpStatus.CREATED.toString(), "Cadastrado");
+        return ResponseEntity.status(HttpStatus.CREATED).body(jsonResponseDto);
     }
 
     //Criar atualizar e deletar
