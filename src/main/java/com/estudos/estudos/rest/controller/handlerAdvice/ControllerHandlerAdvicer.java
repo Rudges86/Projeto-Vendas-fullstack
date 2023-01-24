@@ -25,6 +25,8 @@ public class ControllerHandlerAdvicer{
         return new ApiErros(messageError);
     }
 
+
+
     /*
      fluxo normal sem extender o ResponseEntityException nele já vem oMethodArgumentNotvalid
      @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -47,6 +49,12 @@ public class ControllerHandlerAdvicer{
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiErros);
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Object> illegalArgument (IllegalArgumentException ex){
+        String messageError = ex.getMessage(); // mensagem em inglês
+        ApiErros apiErros = new ApiErros("O id não pode ser nulo");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiErros);
+    }
 
 
 }
