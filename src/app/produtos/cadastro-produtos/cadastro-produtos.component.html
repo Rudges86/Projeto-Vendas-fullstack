@@ -1,0 +1,70 @@
+<div class="container mt-3">
+    <h1>Cadastro de Produto</h1>
+    <form action="" [formGroup]="formProduto" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="Nome" class="form-label">Nome:</label>
+            <input type="text" class="form-control" id="Nome" placeholder="Nome" formControlName="nome"
+                required="required" maxlength="20" [ngClass]="{
+                'is-valid':(formProduto.controls['nome'].valid && formProduto.controls['nome'].touched) || (formProduto.controls['nome'].valid && formProduto.controls['nome'].dirty),
+                'is-invalid':(formProduto.controls['nome'].invalid && formProduto.controls['nome'].touched) || (formProduto.controls['nome'].invalid && formProduto.controls['nome'].dirty)
+            }">
+
+        </div>
+        <div class="mb-3">
+            <label for="categoria" class="form-label">Categoria:</label>
+            <div class="d-flex" formGroupName="categoria">
+                <select class="form-select" aria-label="Default select example" id="categoria" formControlName="id">
+                    <option *ngFor="let a of categoria, let i = index" [value]="i + 1">{{a.nome}}</option>
+                    
+                </select>
+                <span class="ms-3" (click)="open()" style="cursor: pointer;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor"
+                        class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
+                    </svg>
+                </span>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar Categoria</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" formGroupName="categoria">
+                        <input type="text" class="form-control" id="Nome" placeholder="Nome" formControlName="nome">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="cadastraCategoria()">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--Fim da Modal-->
+
+        <div class="mb-3">
+            <label for="preco" class="form-label">Preço:</label>
+            <input type="number" class="form-control" id="preco" placeholder="" formControlName="preco"
+                required="required" [ngClass]="{
+                'is-valid':(formProduto.controls['preco'].valid && formProduto.controls['preco'].touched) || (formProduto.controls['preco'].valid && formProduto.controls['preco'].dirty),
+                'is-invalid':(formProduto.controls['preco'].invalid && formProduto.controls['preco'].touched) || (formProduto.controls['preco'].invalid && formProduto.controls['preco'].dirty)
+            }">
+        </div>
+        <div class="mb-3">
+            <label for="floatingTextarea">Descrição:</label>
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
+                    formControlName="descricao" required="required" style="resize: none"></textarea>
+            </div>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-success me-3 rounded-3" 
+                [disabled]="formProduto.invalid ">Cadastrar</button>
+            <button type="button" class="btn btn-primary rounded-3">Cancelar</button>
+        </div>
+    </form>
+</div>
