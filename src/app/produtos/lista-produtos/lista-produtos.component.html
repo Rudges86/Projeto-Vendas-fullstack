@@ -1,0 +1,43 @@
+<h1 class="mt-4">Lista de Produtos</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Produtos cadastrados</li>
+</ol>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <button class="btn btn-warning" routerLink="/cadastro-produtos"><i class="fa fa-plus"></i>Novo</button>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th>ID:</th>
+                        <th>Nome:</th>
+                        <th>Categoria:</th>
+                        <th>Preço:</th>
+                        <th>Descrição:</th>
+                        <th>Data de cadastro:</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let produto of produtos, let i = index;">
+                        <th>{{produto.id}}</th>
+                        <th>{{produto.nome}}</th>
+                        <th>{{produto.categoria.nome}}</th>
+                        <th>R$ {{produto.preco}}</th>
+                        <th>{{produto.descricao}}</th>
+                        <th>{{produto.dataCadastro}}</th>
+                        <th><button type="button" class="btn btn-danger" (click)="deletaProduto(produto.id,i)">
+                            delete
+                        </button></th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

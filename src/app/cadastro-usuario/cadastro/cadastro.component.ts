@@ -1,6 +1,5 @@
+import { ClientesService } from './../../servicos/clientes.service';
 import { ResponseError } from './../../models/ResponseError';
-import { CadastroModel } from './../../models/CadastroModel';
-import { CadastroService } from './../../servicos/cadastro.service';
 import { Component, OnInit } from '@angular/core';
 import{FormBuilder, FormGroup, Validators} from '@angular/forms'
 
@@ -19,7 +18,7 @@ export class CadastroComponent implements OnInit {
     confPassword:[,[Validators.maxLength(8), Validators.minLength(5),Validators.required]]
   })
 
-  constructor(private cadastro:CadastroService,
+  constructor(private cadastro:ClientesService,
     private fb:FormBuilder) { }
 
   ngOnInit(): void {

@@ -38,7 +38,7 @@
                         <input type="text" class="form-control" id="Nome" placeholder="Nome" formControlName="nome">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" routerLink="/lista-produtos">Cancelar</button>
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="cadastraCategoria()">Salvar</button>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
         <div class="mb-3">
             <button type="submit" class="btn btn-success me-3 rounded-3" 
                 [disabled]="formProduto.invalid ">Cadastrar</button>
-            <button type="button" class="btn btn-primary rounded-3">Cancelar</button>
+            <button type="button" class="btn btn-primary rounded-3" routerLink="/lista-produtos">Cancelar</button>
         </div>
     </form>
 </div>

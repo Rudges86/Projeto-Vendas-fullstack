@@ -1,21 +1,28 @@
+import { RouterModule } from '@angular/router';
+import { ProdutosRoutingModule } from './produtos-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CadastroProdutosComponent } from './cadastro-produtos/cadastro-produtos.component';
+import { ListaProdutosComponent } from './lista-produtos/lista-produtos.component';
 
 
 
 @NgModule({
   declarations: [
-    CadastroProdutosComponent
+    CadastroProdutosComponent,
+    ListaProdutosComponent
   ],
   imports: [
     CommonModule,
+    ProdutosRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   exports:[
-    CadastroProdutosComponent
+    CadastroProdutosComponent,
+    ListaProdutosComponent
   ]
 })
 export class ProdutosModule { }

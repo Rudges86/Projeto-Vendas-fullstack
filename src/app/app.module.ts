@@ -1,4 +1,5 @@
 import { ProdutosModule } from './produtos/produtos.module';
+import { TemplatesModule } from './templates/templates.module';
 import { CadastroUsuarioModule } from './cadastro-usuario/cadastro-usuario.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,7 +18,10 @@ import {HttpClientModule} from '@angular/common/http'
     AppRoutingModule,
     HttpClientModule,
     CadastroUsuarioModule,
-    ProdutosModule
+    TemplatesModule,
+    ProdutosModule,
+    
+    
 
   ],
   providers: [],
