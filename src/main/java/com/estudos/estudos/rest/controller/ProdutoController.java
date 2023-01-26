@@ -19,9 +19,15 @@ import java.util.List;
 public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;
-    @GetMapping
+   //Alterado para a implementação funcionar temporáriamente
+    /*@GetMapping
     public ResponseEntity<List<ProdutoDTO>> pegaTodos(){
         List<ProdutoDTO> produtos = produtoService.getAll();
+        return ResponseEntity.status(HttpStatus.OK).body(produtos);
+    }*/
+    @GetMapping
+    public ResponseEntity<List<Produto>> pegaTodos() {
+        List<Produto> produtos = produtoService.getAll();
         return ResponseEntity.status(HttpStatus.OK).body(produtos);
     }
 
@@ -38,6 +44,11 @@ public class ProdutoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(jsonResponseDto);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ProdutoDTO> delete(@PathVariable Long id){
+        produtoService.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
     //Criar atualizar e deletar
 
 }

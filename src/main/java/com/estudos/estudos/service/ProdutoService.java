@@ -20,7 +20,7 @@ public class ProdutoService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    public List<ProdutoDTO> getAll(){
+    /*public List<ProdutoDTO> getAll(){
         List<Produto> produtosLista = produtoRepository.findAll();;
         List<ProdutoDTO> produtos = new ArrayList<>();
         for(Produto p : produtosLista){
@@ -28,6 +28,13 @@ public class ProdutoService {
         }
         return produtos;
     }
+*/
+
+    public List<Produto> getAll(){
+        List<Produto> produtos= produtoRepository.findAll();
+        return produtos;
+    }
+
 
     public ProdutoDTO getId(Long id) {
         Produto produto = produtoRepository.findById(id)
@@ -43,5 +50,12 @@ public class ProdutoService {
 
         produtoRepository.save(produto);
 
+    }
+
+    public Produto delete(Long id) {
+        return produtoRepository.findById(id).map((existe)->{
+            produtoRepository.deleteById(existe.getId());
+            return existe;
+        }).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado"));
     }
 }
