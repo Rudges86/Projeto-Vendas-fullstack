@@ -6,6 +6,8 @@ import com.estudos.estudos.domain.entity.Produto;
 import com.estudos.estudos.domain.repository.CategoriaRepository;
 import com.estudos.estudos.domain.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -57,5 +59,18 @@ public class ProdutoService {
             produtoRepository.deleteById(existe.getId());
             return existe;
         }).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado"));
+    }
+
+    public Page<Produto> paginado(Pageable pageable) {
+        return produtoRepository.findAll(pageable);
+    }
+
+    public Produto atualizaProduto(Long id, Produto produto) {
+        Produto produtoAtualizado = produtoRepository.findById(id).map((prod)->{
+            produto.setId(prod.getId());
+            produtoRepository.save(produto);
+            return prod;
+        }).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Produto não encontrado"));
+        return produtoAtualizado;
     }
 }

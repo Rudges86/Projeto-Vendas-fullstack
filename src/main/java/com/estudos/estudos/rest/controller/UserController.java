@@ -1,5 +1,6 @@
 package com.estudos.estudos.rest.controller;
 
+import com.estudos.estudos.domain.entity.DTO.CredenciaisDto;
 import com.estudos.estudos.domain.entity.DTO.UserDto;
 import com.estudos.estudos.domain.entity.User;
 import com.estudos.estudos.service.UserService;
@@ -56,6 +57,12 @@ public class UserController {
     public ResponseEntity<UserDto> cadastroUser(@RequestBody @Valid User user){
         userService.cadastroUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<UserDto> login(@RequestBody CredenciaisDto credenciaisDto){
+       UserDto userDto = userService.login(credenciaisDto);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(userDto);
     }
 
     @DeleteMapping("/admin/{id}")

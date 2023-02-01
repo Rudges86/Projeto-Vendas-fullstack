@@ -6,6 +6,8 @@ import com.estudos.estudos.domain.entity.Produto;
 import com.estudos.estudos.service.ProdutoService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +36,7 @@ public class ProdutoController {
     @GetMapping("/{id}")
     public ResponseEntity<ProdutoDTO> getId(@PathVariable Long id){
         ProdutoDTO produtoDTO = produtoService.getId(id);
-        return ResponseEntity.status(HttpStatus.OK).body(produtoDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(produtoService.getId(id));
     }
 
     @PostMapping
@@ -50,5 +52,20 @@ public class ProdutoController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     //Criar atualizar e deletar
+
+
+    //Paginação
+    @GetMapping("/paginado")
+    public ResponseEntity<Page<Produto>> produtosPaginados(Pageable pageable){
+
+        return ResponseEntity.status(HttpStatus.OK).body(produtoService.paginado(pageable));
+    }
+
+    //Fazer o metodo de atualizar
+    @PutMapping("/{id}")
+    public ResponseEntity<Produto> atualizarProdutos(@PathVariable Long id, @RequestBody Produto produto){
+
+        return ResponseEntity.status(HttpStatus.OK).body(produtoService.atualizaProduto(id,produto));
+    }
 
 }

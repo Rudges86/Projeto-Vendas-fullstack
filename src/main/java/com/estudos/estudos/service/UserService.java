@@ -1,5 +1,6 @@
 package com.estudos.estudos.service;
 
+import com.estudos.estudos.domain.entity.DTO.CredenciaisDto;
 import com.estudos.estudos.domain.entity.DTO.UserDto;
 import com.estudos.estudos.domain.entity.User;
 import com.estudos.estudos.domain.repository.UserRepository;
@@ -71,6 +72,24 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.CONFLICT,"E-mail já cadastrado");
         }else{
             userRepository.save(user);
+        }
+    }
+
+    public UserDto login(CredenciaisDto credenciaisDto) {
+
+        User userOk = userRepository.findByEmail(credenciaisDto.getEmail());
+        if(userOk != null){
+            if(credenciaisDto.getPassword().equals(userOk.getPassword())){
+                UserDto dto = new UserDto(userOk);
+                return dto;
+            }
+            else{
+
+                throw new RuntimeException(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Senha incorreto"));
+            }
+        }
+        else{
+            throw new RuntimeException(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email incorreto"));
         }
     }
 }
